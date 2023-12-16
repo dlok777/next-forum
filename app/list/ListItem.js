@@ -1,10 +1,11 @@
 'use client'
 import Link from "next/link"
 
-export default function ListItem({res}) {
+export default async function ListItem({res}) {
   return (
     <div>
       {
+        (res.length == 0) ? <h1>게시글이 없습니다.</h1> :
         res.map((row, i) => 
           <div className="list-item" key={i}>
             <Link key={i} href={`/detail/${row._id}`} style={ { textDecoration:"none" } }>
@@ -31,6 +32,7 @@ export default function ListItem({res}) {
                 }
               })
             }}>(삭제)</span>
+            <p>작성자 : {row.author}</p>
             <p>1월 1일</p>
           </div>
           )

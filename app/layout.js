@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import './globals.css'
 import { Inter } from 'next/font/google'
-// import LoginBtn from './LoginBtn'
-// import { authOptions } from "@/pages/api/auth/[...nextauth]"
+import LoginBtn from './LoginBtn'
+import { getServerSession } from 'next-auth'
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
 // import { useSession } from 'next-auth/react'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -14,13 +15,17 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   // let { session } = await useSession()
-  // console.log(session)
+  let session = await getServerSession(authOptions);
   return (
     <html lang="ko">
       <body>
         <div className="navbar">
           <Link href="/" className="logo">forum</Link>
           <Link href="/list">List</Link>
+          
+          {
+            (session) ? "로그인상태" : <LoginBtn />
+          }
         </div>
         {children}
       </body>
