@@ -12,8 +12,14 @@ export default async function List(req, res) {
         return res;
       }
 
-        
-      let myPost = await db.collection("post").insertOne(bodyObject);
+      try {
+        let myPost = await db.collection("post").insertOne(bodyObject);
+        res.redirect(302, "/list");
+      }
+      catch(e) {
+        console.log(e);
+      }
+      
       res.json(bodyObject);
       break;
     case "GET":

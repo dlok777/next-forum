@@ -4,15 +4,12 @@ import {ObjectId} from "mongodb"
 export default async function List(req, res) {
   const db = (await connectDB).db("forum");
   let retData = new Array();
-
   switch(req.method) {
     case "POST":
-      let bodyObject = req.body;
-
       try {
         let myPost = await db.collection("post").updateOne(
-          {_id : new ObjectId(bodyObject._id)}, 
-          {$set : {title : bodyObject.title, content : bodyObject.content}} 
+          {_id : new ObjectId(req.body._id)}, 
+          {$set : {title : req.body.title, content : req.body.content}} 
         );
 
         res.redirect(302, "/list");
@@ -27,6 +24,16 @@ export default async function List(req, res) {
       res.json({status:200, data:result});
       
       break;
+    case "DELETE":
+      let body = JSON.parse(req.body);
+      try {
+        let result = await db.collection("post").deleteOne({_id : new ObjectId(body._id)});
+        res.status(200).json("success");
+      }
+      catch(e) {
+        console.log("error"+e);
+        res.status(500).json("error");
+      }
   }
 
   
