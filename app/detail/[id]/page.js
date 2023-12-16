@@ -1,5 +1,6 @@
 import {connectDB} from "@/util/database"
 import { ObjectId } from "mongodb"
+import Comment from "./Comment"
 
 export default async function Detail(props) {
 
@@ -10,11 +11,7 @@ export default async function Detail(props) {
       <h4>상세 페이지</h4>
       <h4>{res.title}</h4>
       <p>{res.content}</p>
-      <div>
-        <div>댓글 목록</div>
-        <input />
-        <button>댓글 전송</button>
-      </div>
+      <Comment parent={props.params.id}/>
     </div>
   )
 }

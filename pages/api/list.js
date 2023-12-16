@@ -4,7 +4,6 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
 export default async function List(req, res) {
   const db = (await connectDB).db("forum");
-  let retData = new Array();
   let session = await getServerSession(req, res, authOptions);
   
   switch(req.method) {
