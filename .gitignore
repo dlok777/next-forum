@@ -12,6 +12,8 @@ util
 # next.js
 /.next/
 /out/
+package-lock.json
+pages/api/auth/
 
 # production
 /build
