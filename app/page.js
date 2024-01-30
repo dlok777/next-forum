@@ -5,6 +5,6 @@ export default async function Home() {
   let res = await db.collection("post").find().toArray();
   
   return (
-    <div>das</div>
+    <div>test</div>
   );
 }
